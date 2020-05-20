@@ -168,7 +168,7 @@ module camera_PI3A_base() {
 
         // SD Card Slot
         translate([-1-pw2-CAM_MARGIN_W,-7.5,-d-1])
-            cube([3,15,4]);
+            cube([3,20,4]);
 
         // Mounting holes for the camera
         for(x=[CAM_MOUNT_INDENT-CAM_WIDTH2, CAM_WIDTH2-CAM_MOUNT_INDENT]) {
@@ -314,4 +314,4 @@ assembly();
 //rotate([180,0,0]) camera_mount(1);
 //camera_backplate(1);
 //rotate([180,0,0]) camera_PI3A_base();
-//rotate([180,0,0]) camera_PI3A_top();
+//camera_PI3A_top();
