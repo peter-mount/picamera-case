@@ -173,15 +173,15 @@ module camera_PI3A_base() {
         // Mounting holes for the camera
         for(x=[CAM_MOUNT_INDENT-CAM_WIDTH2, CAM_WIDTH2-CAM_MOUNT_INDENT]) {
             for(y=[CAM_MOUNT_INDENT-CAM_WIDTH2, CAM_WIDTH2-CAM_MOUNT_INDENT]) {
-                translate([x,y,-1]) MHole(2.5,3);
+                translate([x-7.5,y+3,-1]) MHole(2.5,3);
             }
         }
 
         // Slot for feeding the camera cable through
         cw=20;
         cd=2;
-        translate([-cw/2,-cd/2,-2])
-            cube([cw,cd,4]);
+        translate([1.5-cw/2,3-cw/2,-2])
+            cube([cd,cw,4]);
 
         // Mounting holes for the Raspberry PI 3A+
         translate([-pw2-CAM_MARGIN_W+3,-CAM_WIDTH2-CAM_MARGIN_B+4,-1]) {
@@ -303,8 +303,11 @@ module hotshoe(d) {
 module assembly() {
     camera_mount(1);
     translate([0,0, -CAM_WIDTH2+5]) camera_backplate(1);
-    translate([0,0, -CAM_WIDTH+8]) camera_PI3A_base();
-    translate([0,0, -CAM_WIDTH-5]) camera_PI3A_top();
+    rotate([0,0,90])
+        translate([7.5,-3, 0]) {
+            translate([0,0, -CAM_WIDTH+8]) camera_PI3A_base();
+            translate([0,0, -CAM_WIDTH-5]) camera_PI3A_top();
+        }
 }
 
 // Uncomment to show the full assembly
@@ -313,5 +316,8 @@ assembly();
 // Uncomment to generate individual STL's
 //rotate([180,0,0]) camera_mount(1);
 //camera_backplate(1);
-//rotate([180,0,0]) camera_PI3A_base();
+
+// The translation here is I decided to rotate the PI post initial builds so the main
+// cable sockets are now on the side not the top
+//rotate([180,0,90]) translate([6.5,-3,-1]) camera_PI3A_base();
 //camera_PI3A_top();
