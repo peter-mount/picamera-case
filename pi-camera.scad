@@ -281,6 +281,8 @@ module hotshoe(d) {
         translate([0,CAM_WIDTH2+CAM_MARGIN_B-3,-d/2])
             cube([20,5,d], center=true);
         translate([0,CAM_WIDTH2+CAM_MARGIN_B+4,-d/2]) difference() {
+            // This is loosely based on https://www.thingiverse.com/thing:33823 & is used to cut out
+            // the slots
             cube([20,14.8,17.5], center=true);
             translate([0,-7.6,0]) cube([9.4,2.5,17.5], center=true);
             translate([-8.125,-0.60,0]) cube([3.99,10,17.5], center=true);
@@ -309,7 +311,7 @@ module assembly() {
 assembly();
 
 // Uncomment to generate individual STL's
-//camera_mount(1);
-//camera_PI3A_base();
-//rotate([180,0,0]) camera_backplate(1);
+//rotate([180,0,0]) camera_mount(1);
+//camera_backplate(1);
+//rotate([180,0,0]) camera_PI3A_base();
 //rotate([180,0,0]) camera_PI3A_top();
