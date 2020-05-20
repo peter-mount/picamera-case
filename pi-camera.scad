@@ -137,7 +137,7 @@ module camera_backplate(shoe=0) {
  * Raspberry PI 4 enclosure base
  */
 module camera_PI3A_base() {
-    d=12;//CAM_DEPTH + CAM_PCB_THICK +2;
+    d=12;
 
     // Raspberry PI 3A+ board dimensions
     //pw=52.5;
@@ -207,7 +207,7 @@ module camera_PI3A_base() {
  * Raspberry PI 4 enclosure top
  */
 module camera_PI3A_top() {
-    d=21;//12;//CAM_DEPTH + CAM_PCB_THICK +2;
+    d=22;
 
     // Raspberry PI 3A+ board dimensions
     //pw=52.5;
@@ -242,8 +242,12 @@ module camera_PI3A_top() {
             cube([3,16,11]);
 
         // Power, HDMI & Audio/Composite sockets
-        translate([9-pw2-CAM_MARGIN_W, -1+CAM_WIDTH2+CAM_MARGIN_B ,-10])
-                    cube([pw-3-9, 8,10.5]);
+        // Array of [x1,x2,z] defining the cutouts
+        for(x=[ [0,10,4], [17,35,7], [42,52,7] ]) {
+            translate([9-pw2-CAM_MARGIN_W +x[0], -1+CAM_WIDTH2+CAM_MARGIN_B ,-x[2]])
+                cube([ x[1]-x[0], 8, x[2]+0.5]);
+                //cube([pw-3-9, 8,7.5]);
+        }
 
         // Ventilation
         for(y=[-3:4]) {
@@ -301,4 +305,11 @@ module assembly() {
     translate([0,0, -CAM_WIDTH-5]) camera_PI3A_top();
 }
 
+// Uncomment to show the full assembly
 assembly();
+
+// Uncomment to generate individual STL's
+//camera_mount(1);
+//camera_PI3A_base();
+//rotate([180,0,0]) camera_backplate(1);
+//rotate([180,0,0]) camera_PI3A_top();
