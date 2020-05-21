@@ -137,7 +137,7 @@ module camera_backplate(shoe=0) {
  * Raspberry PI 4 enclosure base
  */
 module camera_PI3A_base() {
-    d=12;
+    d=13;
 
     // Raspberry PI 3A+ board dimensions
     //pw=52.5;
@@ -157,18 +157,16 @@ module camera_PI3A_base() {
                 ]);
 
         // Inner enclosure
-        translate([1-pw2-CAM_MARGIN_W,1-CAM_WIDTH2-CAM_MARGIN_B,-d-1])
+        translate([2-pw2-CAM_MARGIN_W,2-CAM_WIDTH2-CAM_MARGIN_B,-d-1])
             cube([
-                pw+CAM_MARGIN_W+CAM_MARGIN_W-2,
-                ph+CAM_MARGIN_T+CAM_MARGIN_T-2,
-                //CAM_WIDTH + 2,
-                //CAM_WIDTH + 2 + 7,
+                pw+CAM_MARGIN_W+CAM_MARGIN_W-4,
+                ph+CAM_MARGIN_T+CAM_MARGIN_T-4,
                 d
                 ]);
 
         // SD Card Slot
         translate([-1-pw2-CAM_MARGIN_W,-7.5,-d-1])
-            cube([3,20,4]);
+            cube([4,20,5]);
 
         // Mounting holes for the camera
         for(x=[CAM_MOUNT_INDENT-CAM_WIDTH2, CAM_WIDTH2-CAM_MOUNT_INDENT]) {
@@ -229,21 +227,21 @@ module camera_PI3A_top() {
 
         }
 
-        // Inner enclosure
-        translate([1-pw2-CAM_MARGIN_W,1-CAM_WIDTH2-CAM_MARGIN_B,1-d])
+        // Inner enclosure, 2mm for extra strength
+        translate([2-pw2-CAM_MARGIN_W,2-CAM_WIDTH2-CAM_MARGIN_B,2-d])
             cube([
-                pw+CAM_MARGIN_W+CAM_MARGIN_W-2,
-                ph+CAM_MARGIN_T+CAM_MARGIN_T-2,
-                d
+                pw+CAM_MARGIN_W+CAM_MARGIN_W-4,
+                ph+CAM_MARGIN_T+CAM_MARGIN_T-4,
+                d-1
                 ]);
 
         // USB A socket
-        translate([-2+pw2+CAM_MARGIN_W,-16/2,-2-8])
-            cube([3,16,11]);
+        translate([-3+pw2+CAM_MARGIN_W,-16/2,-2-8])
+            cube([4,16,11]);
 
         // Power, HDMI & Audio/Composite sockets
         // Array of [x1,x2,z] defining the cutouts
-        for(x=[ [0,10,4], [17,35,7], [42,52,7] ]) {
+        for(x=[ [-1,11,4], [17,34,8], [43,51,8] ]) {
             translate([9-pw2-CAM_MARGIN_W +x[0], -1+CAM_WIDTH2+CAM_MARGIN_B ,-x[2]])
                 cube([ x[1]-x[0], 8, x[2]+0.5]);
                 //cube([pw-3-9, 8,7.5]);
@@ -306,12 +304,12 @@ module assembly() {
     rotate([0,0,90])
         translate([7.5,-3, 0]) {
             translate([0,0, -CAM_WIDTH+8]) camera_PI3A_base();
-            translate([0,0, -CAM_WIDTH-5]) camera_PI3A_top();
+            //translate([0,0, -CAM_WIDTH-5]) camera_PI3A_top();
         }
 }
 
 // Uncomment to show the full assembly
-assembly();
+//assembly();
 
 // Uncomment to generate individual STL's
 //rotate([180,0,0]) camera_mount(1);
@@ -319,5 +317,5 @@ assembly();
 
 // The translation here is I decided to rotate the PI post initial builds so the main
 // cable sockets are now on the side not the top
-//rotate([180,0,90]) translate([6.5,-3,-1]) camera_PI3A_base();
+rotate([180,0,90]) translate([6.5,-3,-1]) camera_PI3A_base();
 //camera_PI3A_top();
