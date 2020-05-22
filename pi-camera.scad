@@ -309,7 +309,7 @@ module assembly() {
 }
 
 // Uncomment to show the full assembly
-//assembly();
+assembly();
 
 // Uncomment to generate individual STL's
 //rotate([180,0,0]) camera_mount(1);
@@ -317,5 +317,5 @@ module assembly() {
 
 // The translation here is I decided to rotate the PI post initial builds so the main
 // cable sockets are now on the side not the top
-rotate([180,0,90]) translate([6.5,-3,-1]) camera_PI3A_base();
+//rotate([180,0,90]) translate([6.5,-3,-1]) camera_PI3A_base();
 //camera_PI3A_top();
