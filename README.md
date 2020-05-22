@@ -48,3 +48,7 @@ For assembly, you also require:
 ## STL's
 
 STL's are available on Thingiverse: https://www.thingiverse.com/thing:4384389
+
+## Assembly instructions
+
+I've made a video on how to assemble the enclosure: https://www.youtube.com/watch?v=vmBG335nT-8
