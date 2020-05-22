@@ -44,3 +44,7 @@ For assembly, you also require:
 * 8 M2.5x11 spacers
 * 4 M2.5x11+6 spacers
 * 4 M2.5x20+6 spacers
+
+## STL's
+
+STL's are available on Thingiverse: https://www.thingiverse.com/thing:4384389
